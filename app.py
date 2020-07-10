@@ -32,7 +32,7 @@ def index():
     if current_user.is_authenticated:
         user = vk_oauth.get_user_name(current_user.token)
         friend_list = vk_oauth.get_friends_names(current_user.token, 5)
-        if user[1] == 400 or friend_list[1] == 400:
+        if user[1] == 400:
             deleted_user = current_user
             logout()
             db.session.delete(deleted_user)
@@ -46,9 +46,11 @@ def index():
 @app.route('/oauth/redirect', methods=['GET'])
 def oauth_redirect():
     if current_user.is_authenticated:
+        print('auth')
         return redirect(url_for('index'))
 
     if request.args.get('code'):
+        print('code')
         oauth = vk_oauth.VkOAuth()
         code = request.args.get('code')
         req = requests.get(oauth.get_receive_url(code)).json()
