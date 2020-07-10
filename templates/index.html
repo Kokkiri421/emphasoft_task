@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VK APP</title>
+</head>
+<body>
+    {%if current_user.is_anonymous%}
+    <button onclick="window.location.href='{{link}}';">
+        ВК Авторизация
+    </button>
+    {%else%}
+    <h1>{{ user['first_name'] }} {{ user['last_name'] }}</h1>
+    <ul>
+        {% for friend in friend_list %}
+        <li>{{ friend['first_name'] }}  {{friend['last_name']}}</li>
+        {% endfor %}
+    </ul>
+    {%endif%}
+</body>
+</html>
