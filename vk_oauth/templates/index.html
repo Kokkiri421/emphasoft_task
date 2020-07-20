@@ -17,7 +17,9 @@
         <p>Your friend list is empty</p>
         {% endif %}
     {% else %}
+    <button type="button">
     <a href="{% url 'social:begin' 'vk-oauth2' %}">Login with VK</a>
+    </button>
     {% endif %}
 </body>
 </html>
